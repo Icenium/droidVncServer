@@ -76,10 +76,12 @@ int initFB(void)
     (int)scrinfo.bits_per_pixel);
 
   size_t size = scrinfo.yres_virtual;
-  if (size < scrinfo.yres * 2) {
-    L("Using Droid workaround\n");
-    size = scrinfo.yres * 2;
-  }
+  // When building for AWS, the droid workaround causes EINVAL on line 93 (fbmmap = mmap...). Most likely reason is that length is outside our process space.
+  // If we decide to bring it back, we should investigate
+  // if (size < scrinfo.yres * 2) {
+  //   L("Using Droid workaround\n");
+  //   size = scrinfo.yres * 2;
+  // }
 
   if ((scrinfo.bits_per_pixel == 24)) {
     scrinfo.bits_per_pixel = 32;
