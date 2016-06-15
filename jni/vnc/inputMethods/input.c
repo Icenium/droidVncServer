@@ -48,7 +48,7 @@ void initInput()
     1 /* Version id. */
   }; 
 
-  if((inputfd = suinput_open("Generic", &id)) == -1)
+  if((inputfd = suinput_open("qwerty", &id)) == -1)
   {
     L("cannot create virtual kbd device.\n");
     sendMsgToGui("~SHOW|Cannot create virtual input device!\n");
