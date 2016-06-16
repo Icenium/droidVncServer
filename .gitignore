@@ -2,3 +2,6 @@ bin
 gen
 libs
 obj
+.vagrant
+*~
+.Ulysses*

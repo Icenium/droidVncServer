@@ -1,0 +1,36 @@
+[submodule "vagrant/cookbooks/build-essential"]
+	path = vagrant/cookbooks/build-essential
+	url = https://github.com/opscode-cookbooks/build-essential.git
+[submodule "vagrant/cookbooks/vim"]
+	path = vagrant/cookbooks/vim
+	url = https://github.com/opscode-cookbooks/vim.git
+[submodule "vagrant/cookbooks/git"]
+	path = vagrant/cookbooks/git
+	url = https://github.com/opscode-cookbooks/git.git
+[submodule "vagrant/cookbooks/java"]
+	path = vagrant/cookbooks/java
+	url = https://github.com/opscode-cookbooks/java.git
+[submodule "vagrant/cookbooks/yum-epel"]
+	path = vagrant/cookbooks/yum-epel
+	url = https://github.com/opscode-cookbooks/yum-epel.git
+[submodule "vagrant/cookbooks/windows"]
+	path = vagrant/cookbooks/windows
+	url = https://github.com/opscode-cookbooks/windows.git
+[submodule "vagrant/cookbooks/dmg"]
+	path = vagrant/cookbooks/dmg
+	url = https://github.com/opscode-cookbooks/dmg.git
+[submodule "vagrant/cookbooks/runit"]
+	path = vagrant/cookbooks/runit
+	url = https://github.com/opscode-cookbooks/runit.git
+[submodule "vagrant/cookbooks/packagecloud"]
+	path = vagrant/cookbooks/packagecloud
+	url = https://github.com/computology/packagecloud-cookbook.git
+[submodule "vagrant/cookbooks/chef_handler"]
+	path = vagrant/cookbooks/chef_handler
+	url = https://github.com/opscode-cookbooks/chef_handler.git
+[submodule "vagrant/cookbooks/yum"]
+	path = vagrant/cookbooks/yum
+	url = https://github.com/opscode-cookbooks/yum.git
+[submodule "vagrant/cookbooks/apt"]
+	path = vagrant/cookbooks/apt
+	url = https://github.com/chef-cookbooks/apt.git
