@@ -18,6 +18,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 #include "input.h"
+#include "time.h"
 
 int inputfd = -1;
 // keyboard code modified from remote input by http://www.math.bme.hu/~morap/RemoteInput/
@@ -37,6 +38,7 @@ int spec3sh[] = {0,0,0,1,1,0};
 int spec4[] = {26,43,27,215,14};
 int spec4sh[] = {1,1,1,1,0};
 
+time_t lastUpdate = 0;
 
 void initInput()
 {
@@ -189,7 +191,6 @@ return 23; //I with acute -> i with grave
     return 0;
 }
 
-
 void keyEvent(rfbBool down, rfbKeySym key, rfbClientPtr cl)
 {
   int code;
@@ -223,13 +224,12 @@ void keyEvent(rfbBool down, rfbKeySym key, rfbClientPtr cl)
 
     //     L("injectKey (%d, %d) ret=%d\n", code , down,ret);    
   }
+
+  notifyActivity();
 }
-
-
 
 void ptrEvent(int buttonMask, int x, int y, rfbClientPtr cl)
 {
-
   static int leftClicked=0,rightClicked=0,middleClicked=0;
 
   if ( inputfd == -1 )
@@ -285,13 +285,14 @@ void ptrEvent(int buttonMask, int x, int y, rfbClientPtr cl)
     middleClicked=1;
     suinput_press( inputfd,KEY_END);
   }
-    else if (middleClicked)// mid btn released
-    {
-      middleClicked=0;
-      suinput_release( inputfd,KEY_END);
-    }
-    }
+  else if (middleClicked)// mid btn released
+  {
+    middleClicked=0;
+    suinput_release( inputfd,KEY_END);
+  }
 
+  notifyActivity();
+}
 
 inline void transformTouchCoordinates(int *x, int *y,int width,int height)
 {
@@ -322,6 +323,20 @@ inline void transformTouchCoordinates(int *x, int *y,int width,int height)
 
 }
 
+void notifyActivity()
+{
+  time_t now = time(NULL);
+  if (difftime(now, lastUpdate) > 60)
+  {
+    FILE *file = fopen("/data/local/tmp/vnc.ts", "w");
+    if (file != NULL)
+    {
+      fprintf(file, "%ld", (long)now);
+      fclose(file);
+      lastUpdate = now;
+    }
+  }
+}
 
 void cleanupInput()
 {
